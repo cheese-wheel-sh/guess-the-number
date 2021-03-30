@@ -9,15 +9,15 @@ def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def correctNumberGuessed(correctNumber: int):
+def correctNumberGuessed(correctNumber):
     clearConsole()
-    print(f"Du hast es geschafft!\n
-          Die gesuchte Nummer war tatsächlich {correctNumber}!")
+    print("Du hast es geschafft!\nDie gesuchte Nummer war tatsächlich {}!"
+          .format(correctNumber))
     time.sleep(5)
     sys.exit()
 
 
-def checkInput(randomNumber: int):
+def checkInput(randomNumber):
     userNumber = None
     while userNumber != randomNumber:
         try:
