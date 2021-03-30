@@ -17,7 +17,7 @@ def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def correctNumberGuessed():
+def numberGuessedCorrectly():
     clearConsole()
     print(
         f"Du hast es geschafft!\n
@@ -26,21 +26,27 @@ def correctNumberGuessed():
     sys.exit()
 
 
-if __name__ == "__main__":
-    globalVar.randomNumber = random.choice(range(101))
+def checkInput():
+    clearConsole()
+    num = globalVar.userNumber
+    if num > globalVar.randomNumber:
+        print(f"Die gesuchte Zahl ist kleiner als {num}")
+    elif num < globalVar.randomNumber:
+        print(f"Die gesuchte Zahl ist größer als {num}")
+
+
+def whileNotGuessed():
     while globalVar.userNumber != globalVar.randomNumber:
         try:
             globalVar.userNumber = int(input("Rate die gesuchte Nummer: "))
-            if globalVar.userNumber > globalVar.randomNumber:
-                clearConsole()
-                print(
-                    f"Die gesuchte Zahl ist kleiner als {globalVar.userNumber}"
-                    )
-            elif globalVar.userNumber < globalVar.randomNumber:
-                clearConsole()
-                print(
-                    f"Die gesuchte Zahl ist größer als {globalVar.userNumber}")
+            checkInput()
         except ValueError:
             clearConsole()
             pass
-    correctNumberGuessed()
+
+
+if __name__ == "__main__":
+    globalVar.randomNumber = random.choice(range(101))
+    clearConsole()
+    whileNotGuessed()
+    numberGuessedCorrectly()
