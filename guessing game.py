@@ -5,42 +5,35 @@ import sys
 import time
 
 
-class globalVars():
-    randomNumber = None
-    userNumber = None
-
-
-globalVar = globalVars()
-
-
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def correctNumberGuessed():
+def correctNumberGuessed(correctNumber: int):
     clearConsole()
-    print(
-        f"Du hast es geschafft!\n
-        Die gesuchte Nummer war tatsächlich {globalVar.userNumber}!")
+    print(f"Du hast es geschafft!\n
+          Die gesuchte Nummer war tatsächlich {correctNumber}!")
     time.sleep(5)
     sys.exit()
 
 
-if __name__ == "__main__":
-    globalVar.randomNumber = random.choice(range(101))
-    while globalVar.userNumber != globalVar.randomNumber:
+def checkInput(randomNumber: int):
+    userNumber = None
+    while userNumber != randomNumber:
         try:
-            globalVar.userNumber = int(input("Rate die gesuchte Nummer: "))
-            if globalVar.userNumber > globalVar.randomNumber:
+            userNumber = int(input("Rate die gesuchte Nummer: "))
+            if userNumber > randomNumber:
                 clearConsole()
-                print(
-                    f"Die gesuchte Zahl ist kleiner als {globalVar.userNumber}"
-                    )
-            elif globalVar.userNumber < globalVar.randomNumber:
+                print(f"Die gesuchte Zahl ist kleiner als {userNumber}")
+            elif userNumber < randomNumber:
                 clearConsole()
-                print(
-                    f"Die gesuchte Zahl ist größer als {globalVar.userNumber}")
+                print(f"Die gesuchte Zahl ist größer als {userNumber}")
         except ValueError:
             clearConsole()
             pass
-    correctNumberGuessed()
+
+
+if __name__ == "__main__":
+    randomNumber = random.choice(range(101))
+    checkInput(randomNumber)
+    correctNumberGuessed(randomNumber)
